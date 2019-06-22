@@ -1,0 +1,291 @@
+<html>
+<head>
+    <title>FOSIL</title> <!-- set title for tab bar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'> <!-- get specific font -->
+    <style>
+        /* set positions of all the drop boxes */
+        #refl { 
+            width: 170px;
+            height: 140px;
+            position: absolute;
+            left: 633px;
+            top: 199px;
+        }
+        #exp {
+            width: 170px;
+            height: 140px;
+            position: absolute;
+            left: 634px;
+            top: 402px;
+        }
+        #infornat {
+            width: 900px;
+            height: 300px;
+            padding: 10px;
+            position: absolute;
+            left: 455px;
+            top: 620px; 
+        }
+        #const {
+            width: 170px;
+            height: 140px;
+            padding: 10px;
+            position: absolute;
+            left: 809px;
+            top: 490px;
+        }
+        #inv {
+            width: 170px;
+            height: 140px;
+            position: absolute;
+            left: 1010px;
+            top: 405px;
+        }
+        #won {
+            width: 170px;
+            height: 140px;
+            position: absolute;
+            left: 1003px;
+            top: 204px;
+        }
+        #con {
+            width: 170px;
+            height: 140px;
+            padding: 10px;
+            position: absolute;
+            left: 812px;
+            top: 91px;
+        }
+        #conte {
+            width: 170px;
+            height: 70px;
+            padding: 10px;
+            position: absolute;
+            left: 982px;
+            top: 101px; 
+        }
+        #wonte {
+            width: 170px;
+            height: 70px;
+            padding: 10px;
+            position: absolute;
+            left: 1162px;
+            top: 224px;
+        }
+        #invte {
+            width: 170px;
+            height: 70px;
+            padding: 10px;
+            position: absolute;
+            left: 1164px;
+            top: 427px;
+        }
+        #conste {
+            width: 170px;
+            height: 70px;
+            padding: 10px;
+            position: absolute;
+            left: 606px;
+            top: 559px;
+        }
+        #expte {
+            width: 170px;
+            height: 70px;
+            padding: 10px;
+            position: absolute;
+            left: 420px;
+            top: 427px;
+        }
+        #refte {
+            width: 170px;
+            height: 70px;
+            padding: 10px;
+            position: absolute;
+            left: 420px;
+            top: 223px;
+        }
+        /* set position of box containing stages and definitions */
+        #stages1 {
+            width: 400;
+            height: 450;
+            border-radius: 5%;
+            position: absolute;
+            border: 5px solid;
+            border-color: white;
+            left: 10;
+            top: 200;
+        }
+        #definitions1 {
+            border-radius: 5%;
+            position: absolute;
+            width:290;
+            height:500;
+            left:10;
+            top: 200;
+            border: 5px solid;
+            border-color: white;
+        }
+        /* set position of the photo of cycle */
+        #cycle {
+            position: absolute;
+            left: 450;
+        }
+        /* set design of headers */
+        h1 {
+            color: #9E2831;
+            vertical-align: middle;
+            font-size: 35px;
+            font-family: 'Montserrat';
+        }
+        /* set design of paragraphs */
+        p {
+            font-size: 25;
+            font-family: 'Montserrat';
+        }
+        /* set design of inputs */
+        input {
+            font-family: 'Montserrat';
+            font-size:25;
+            border: 2px solid;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        /* set design of zoom overs */
+        .zoom {
+            padding: 50px;
+          transition: transform .2s;
+          width: 0px;
+          height: 0px;
+        }
+        .zoom:hover {
+          -ms-transform: scale(1.5); /* IE 9 */
+          -webkit-transform: scale(1.5); /* Safari 3-8 */
+          transform: scale(1.5); 
+        }
+
+    </style>
+    <script>
+        var score = 0; // inititate score value
+        var connect_stage = ["drag1",0,1,"stages1",1,0]; // create lists with parameters to check and add to for stages and definitions
+        var wonder_stage = ["drag2",0,1,"stages1",1,0];
+        var investigate_stage = ["drag3",0,1,"stages1",1,0];
+        var construct_stage = ["drag5",0,1,"stages1",1,0];
+        var express_stage = ["drag6",0,1,"stages1",1,0];
+        var reflect_stage = ["drag4",0,1,"stages1",1,0];
+        var connect_definition = ["drag9",0,1,"definitions1",1,0];
+        var wonder_definition = ["drag7",0,1,"definitions1",1,0];
+        var investigate_definition = ["drag8",0,1,"definitions1",1,0];
+        var construct_definition = ["drag10",0,1,"definitions1",1,0];
+        var express_definition = ["drag12",0,1,"definitions1",1,0];
+        var reflect_definition = ["drag11",0,1,"definitions1",1,0];
+        
+        function begin() { //called in onLoad
+            document.getElementById('definitions1').style.display = 'none'; //hide definitions
+            document.getElementById("inf2").style.display = "none"; //hide definitions explanation
+            document.getElementById("sco").style.display = "none"; //hide score p
+            document.getElementById("ss").style.display = "none";
+        }
+        function action(bx,col) { //action that flashes box if correct or wrong
+            document.getElementById(bx).style.borderColor = col; //set border to colour
+            setTimeout(function(){document.getElementById(bx).style.borderColor = "white";}, 500); //after 0.5 of a second it goes back to normal
+        }
+        function showScore() { //get score
+             var nameou = prompt("Name: ", ""); //get name
+             document.getElementById("scrd").innerHTML = nameou + " scored: " + String(score); //display on webpage
+            window.location.replace('http://192.168.1.147:5000/score/'+nameou+'/'+score+'/'+connect_stage[1]+'/'+wonder_stage[1]+'/'+investigate_stage[1]+'/'+construct_stage[1]+'/'+express_stage[1]+'/'+reflect_stage[1]+'/'+connect_definition[1]+'/'+wonder_definition[1]+'/'+investigate_definition[1]+'/'+construct_definition[1]+'/'+express_definition[1]+'/'+reflect_definition[1]); //create flask url
+        }
+        function allowDrop(ev) {
+            ev.preventDefault(); //allow 'ev' photo to drop
+        }
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id); // transfer the image across
+        }
+        function check(ev, item) { //check if correct
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data)); //puts image in div
+            if (data == item[0]) { //if equlas to correct image e.g. drag1
+                document.getElementById(data).setAttribute('draggable', 'false'); //stop it from moving
+                score=score+item[2]; //add to the score the relevant value (stop getting points if already got wrong)
+                action(item[3],'green'); //flash box it is in green e.g. definitions1
+                item[4]=0; //set attempt change to 0 to stop repeats
+                item[5]=1; //set that box to full
+                var total = connect_stage[5] + wonder_stage[5] + investigate_stage[5] + construct_stage[5] + express_stage[5] + reflect_stage[5]; //adds all of boxes full values
+                var total2 = connect_definition[5] + wonder_definition[5] + investigate_definition[5] + construct_definition[5] + express_definition[5] + reflect_definition[5];
+                if (item[3] == "definitions1") { //if it is in definitions section
+                    if (total2 == 6) { //if everything full
+                        setTimeout(showScore, 600); //show score in 0.6 of a second
+                    }
+                } else if(item[3] == "stages1") { //if it is in the stages section
+                    if (total == 6) { //if everything full
+                        setTimeout(show, 600); //show definitions in 0.6 of a second
+                    }
+                }
+            } else { //if wrong
+                action(item[3], 'red'); //flash box it is in red
+                document.getElementById(item[3]).appendChild(document.getElementById(data)); //put it back in the correct place
+                item[1]=item[1]+item[4]; //add the attempts value if already placed to stop over attempting
+                item[2]=0; //set score add to 0
+            }
+        }
+        function check_basic(ev) { //basic check for non-specific boxes
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+        function show() {
+            document.getElementById('stages1').style.display = 'none'; //hide stages
+            document.getElementById('definitions1').style.display = 'block'; //show definitions
+            document.getElementById('inf1').style.display = "none"; //hide stages explanation
+            document.getElementById('inf2').style.display = "block"; //show definitions stages
+            document.getElementById("sco").style.display = "block";  //show scotr
+        }  
+    </script>
+</head>
+
+<body onLoad="begin()"> <!-- perform begin on onLoad -->
+    <h1>Framework of Skills for Inquiry Learning</h1>
+   
+    <div id="cycle"><img src="FOSIL_3.0_Blank.png" width=900 height=600></div> <!-- image of cycle -->
+    <div id="infornat"> <!-- information positions -->
+        <p id="inf1"><b>Here is a model of the FOSIL inquiry process: </b>Try to arrange the six coloured stages into the correct logical order by dragging and dropping them into the circular spaces</p>
+        <p id="inf2"><b>Here are the definitions for the circles (stages): </b>Try to match the them up in the most logical way by dragging and dropping them into the arrow-shaped spaces</p>
+    </div>
+    
+    <!-- boxes for stages or definitions -->
+    <div id="refl" ondrop="check(event, reflect_stage)" ondragover="allowDrop(event)"></div>
+    <div id="exp" ondrop="check(event, express_stage)" ondragover="allowDrop(event)"></div>
+    <div id="const" ondrop="check(event, construct_stage)" ondragover="allowDrop(event)"></div>
+    <div id="inv" ondrop="check(event, investigate_stage)" ondragover="allowDrop(event)"></div>
+    <div id="won" ondrop="check(event, wonder_stage)" ondragover="allowDrop(event)"></div>
+    <div id="con" ondrop="check(event, connect_stage)" ondragover="allowDrop(event)"></div>
+    <div id="refte" ondrop="check(event, reflect_definition)" ondragover="allowDrop(event)"></div>
+    <div id="expte" ondrop="check(event, express_definition)" ondragover="allowDrop(event)"></div>
+    <div id="conste" ondrop="check(event, construct_definition)" ondragover="allowDrop(event)"></div>
+    <div id="invte" ondrop="check(event, investigate_definition)" ondragover="allowDrop(event)"></div>
+    <div id="wonte" ondrop="check(event, wonder_definition)" ondragover="allowDrop(event)"></div>
+    <div id="conte" ondrop="check(event, connect_definition)" ondragover="allowDrop(event)"></div>
+    <!-- stages container -->
+    <div id="stages1" ondrop="check_basic(event)" ondragover="allowDrop(event)">
+        <img id="drag6" src="EXPRESS.png" draggable="true" ondragstart="drag(event)" width="160" height="145">
+        <img id="drag5" src="CONSTRUCT.png" draggable="true" ondragstart="drag(event)" width="160" height="145">
+        <img id="drag4" src="REFLECT.png" draggable="true" ondragstart="drag(event)" width="160" height="145">
+        <img id="drag2" src="WONDER.png" draggable="true" ondragstart="drag(event)" width="160" height="145">
+        <img id="drag1" src="CONNECT.png" draggable="true" ondragstart="drag(event)" width="160" height="145">
+        <img id="drag3" src="INVESTIGATE.png" draggable="true" ondragstart="drag(event)" width="160" height="145">
+    </div>
+    <!-- definitions container -->
+    <div class="zoom" id="definitions1" ondrop="check_basic(event)" ondragover="allowDrop(event)">
+        <img id="drag10" src="constructt.png" draggable="true" ondragstart="drag(event)" width="200" height="70">
+        <img id="drag11" src="reflectt.png" draggable="true" ondragstart="drag(event)" width="200" height="70">
+        <img id="drag12" src="expresst.png" draggable="true" ondragstart="drag(event)" width="200" height="70">
+        <img id="drag7" src="wondert.png" draggable="true" ondragstart="drag(event)" width="200" height="70">
+        <img id="drag8" src="investigatet.png" draggable="true" ondragstart="drag(event)" width="200" height="70">
+        <img id="drag9"  src="connectt.png" draggable="true" ondragstart="drag(event)" width="200" height="70">
+    </div> 
+    <input type="button" onClick="history.go(0)" value="Reset"> <!-- button for reset -->
+    <p id="scrd"></p>  <!-- score paragraph -->
+</body>
+</html>
