@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>Your Score</title>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+		<script>
+			function reloadit() {
+				window.location.replace('https://teentech.oakham.rutland.sch.uk');
+			}
+			function start() {
+				setTimeout(reloadit, 10000);
+			}
+		</script>
+		<style>
+			body {
+				font-size: 25;
+				font-family: 'Montserrat';
+			}
+			p {
+				font-size:30;
+			}
+			#row {
+				font-size:30;
+			}
+			tr {
+				font-size: 25;
+			}
+		</style>
+	</head>
+	<body onLoad="start()">
+		<h1>Your feedback form: </h1>
+		<p> <b>{{ name }}</b> scored: {{ score }}</p>
+		
+		<table style="width:100%">
+			<p>Number of attempts taken to correctly position each stage and definition: </p>
+			<tr id="row">
+				<th></th>
+				<th>Stage</th>
+				<th>Definition</th>
+			</tr>
+			
+			<tr>
+				<th>Connect</th>
+				<th> {{coni}}</th>
+				<th> {{conti}}</th>
+			</tr>
+			<tr>
+				<th>Wonder</th>
+				<th> {{woni}}</th>
+				<th> {{wonti}}</th>
+			</tr>
+			<tr>
+				<th>Investigate</th>
+				<th> {{invi}}</th>
+				<th> {{invti}}</th>
+				
+			</tr>
+			<tr>
+				<th>Construct</th>
+				<th> {{consti}}</th>
+				<th> {{constiti}}</th>
+				
+			</tr>
+			<tr>
+				<th>Express</th>
+				<th>{{expi}}</th>
+				<th>{{expti}}</th>
+			</tr>
+			<tr>
+				<th>Reflect</th>
+				<th>{{refli}}</th>
+				<th>{{reflt}}</th>
+			</tr>
+			
+		
+		</table>
+	</body>
+</html>
