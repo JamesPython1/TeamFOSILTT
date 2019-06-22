@@ -7,8 +7,8 @@ from time import sleep
 
 sense = SenseHat()
 
-ADAFRUIT_IO_USERNAME = "Jgsch"
-ADAFRUIT_IO_KEY = "aabd69baf5a74a5fa8831b101d0ef1f3"
+ADAFRUIT_IO_USERNAME = ""
+ADAFRUIT_IO_KEY = ""
 
 app = Flask(__name__)
 aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
