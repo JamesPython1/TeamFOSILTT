@@ -15,8 +15,8 @@ options.brightness = 90
 matrix = RGBMatrix(options = options) #apply options to matrix
 offset_canvas = matrix.CreateFrameCanvas() #apply frame to matrix
 
-ADAFRUIT_IO_USERNAME = "Jgsch" #MQTT authorization codes
-ADAFRUIT_IO_KEY = "aabd69baf5a74a5fa8831b101d0ef1f3" 
+ADAFRUIT_IO_USERNAME = "" #MQTT authorization codes
+ADAFRUIT_IO_KEY = "" 
 FEED_ID = 'mean' #feed containing the mean
 
 global mn
